@@ -58,4 +58,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         errorResponse.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler({ ItemAlreadyExistException.class})
+    public ResponseEntity<ErrorResponse> handleItemAlreadyExistException(ItemAlreadyExistException ex){
+        ErrorResponse errorResponse= new ErrorResponse();
+        errorResponse.setMessage(ex.getMessage());
+        errorResponse.setDate(new Date());
+        errorResponse.setStatusCode(HttpStatus.CONFLICT.value());
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
 }

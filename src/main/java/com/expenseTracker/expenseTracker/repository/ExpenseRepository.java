@@ -2,8 +2,6 @@ package com.expenseTracker.expenseTracker.repository;
 
 import com.expenseTracker.expenseTracker.entity.Expense;
 import java.util.Date;
-import java.util.List;
-import org.springframework.data.domain.ManagedTypes;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
