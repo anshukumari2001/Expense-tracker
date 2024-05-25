@@ -33,17 +33,18 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User readUser(Long id) {
+    public User readUser() {
+        Long id= getLogdInUser().getId();
         return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User is not present with id : " + id));
     }
 
-    public void deleteUser(Long id) {
-        User user = readUser(id);
+    public void deleteUser() {
+        User user = readUser();
         userRepository.delete(user);
     }
 
-    public User updateUser(UserModel userModel, Long id) {
-        User existingUser = readUser(id);
+    public User updateUser(UserModel userModel) {
+        User existingUser = readUser();
         existingUser.setName(userModel.getName()!=null ? userModel.getName() : existingUser.getName());
         existingUser.setAge(userModel.getAge()!=null ? userModel.getAge() : existingUser.getAge());
         existingUser.setEmail(userModel.getEmail()!=null ? userModel.getEmail() : existingUser.getEmail());

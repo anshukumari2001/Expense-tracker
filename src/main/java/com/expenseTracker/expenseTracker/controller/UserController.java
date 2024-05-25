@@ -31,19 +31,19 @@ public class UserController {
         return new ResponseEntity<>(userService.createUser(userModel), HttpStatus.CREATED) ;
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<User> readUser(@PathVariable Long id) {
-        return new ResponseEntity<>(userService.readUser(id), HttpStatus.OK) ;
+    @GetMapping("/user")
+    public ResponseEntity<User> readUser() {
+        return new ResponseEntity<>(userService.readUser(), HttpStatus.OK) ;
     }
 
-    @DeleteMapping("/user/{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+    @DeleteMapping("/user")
+    public ResponseEntity<HttpStatus> deleteUser() {
+        userService.deleteUser();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT) ;
     }
 
-    @PutMapping("/user/{id}")
-    public ResponseEntity<User> updateUser(@Valid @RequestBody UserModel userModel, @PathVariable Long id) {
-        return new ResponseEntity<>(userService.updateUser(userModel, id), HttpStatus.OK) ;
+    @PutMapping("/user")
+    public ResponseEntity<User> updateUser(@Valid @RequestBody UserModel userModel) {
+        return new ResponseEntity<>(userService.updateUser(userModel), HttpStatus.OK) ;
     }
 }

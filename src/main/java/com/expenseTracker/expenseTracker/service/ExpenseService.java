@@ -26,8 +26,9 @@ public class ExpenseService {
         return expenseRepository.findByUserId(userService.getLogdInUser().getId(), page);
     }
 
-    public Expense getExpenseById(Long id) throws Exception {
-        Optional<Expense> expense = expenseRepository.findById(id);
+    public Expense getExpenseById(Long id) {
+        Optional<Expense> expense =
+            expenseRepository.findByUserIdAndId(userService.getLogdInUser().getId(), id);
         if(expense.isPresent()){
             return expense.get();
         }
@@ -62,14 +63,17 @@ public class ExpenseService {
     }
 
     public List<Expense> getExpenseByCategory(String category, Pageable page) {
-        return expenseRepository.findByCategory(category, page).toList();
+        return expenseRepository.findByUserIdAndCategory(userService.getLogdInUser().getId(),
+                                                         category,
+                                                         page).toList();
     }
 
     public List<Expense> getExpenseByName(String name, Pageable page) {
-        return expenseRepository.findByNameContaining(name, page).toList();
+        return expenseRepository.findByUserIdAndNameContaining(userService.getLogdInUser().getId(), name, page).toList();
     }
 
     public List<Expense> getExpenseByDateRange(Date startDate, Date endDate, Pageable page) {
-        return expenseRepository.findByDateBetween(startDate, endDate, page).getContent();
+        return expenseRepository.findByUserIdAndDateBetween(userService.getLogdInUser().getId(),
+                                                            startDate, endDate, page).getContent();
     }
 }
