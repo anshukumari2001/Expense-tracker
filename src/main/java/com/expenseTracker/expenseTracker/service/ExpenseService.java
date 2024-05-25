@@ -14,14 +14,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ExpenseService {
-    private ExpenseRepository expenseRepository;
+    private final ExpenseRepository expenseRepository;
+    private final UserService userService;
 
-    public ExpenseService(ExpenseRepository expenseRepository) {
+    public ExpenseService(ExpenseRepository expenseRepository, UserService userService) {
         this.expenseRepository = expenseRepository;
+        this.userService = userService;
     }
 
     public Page<Expense> getAllExpenses(Pageable page) {
-        return expenseRepository.findAll(page);
+        return expenseRepository.findByUserId(userService.getLogdInUser().getId(), page);
     }
 
     public Expense getExpenseById(Long id) throws Exception {
@@ -37,6 +39,7 @@ public class ExpenseService {
     }
 
     public Expense saveExpense(Expense expense) {
+        expense.setUser(userService.getLogdInUser());
         return expenseRepository.save(expense);
     }
 
