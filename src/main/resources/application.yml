@@ -11,3 +11,6 @@ spring:
 server:
   servlet:
     context-path: /api/v1
+
+jwt:
+  secret: "your-very-long-secret-key-that-is-at-least-64-characters-long-your-very-long-secret-key-that-is-at-least-64-characters-long"
