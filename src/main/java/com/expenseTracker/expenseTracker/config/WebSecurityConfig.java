@@ -40,7 +40,7 @@ public class WebSecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
-                                       .requestMatchers("/login").permitAll()
+                                       .requestMatchers("/login", "/user").permitAll()
                                        .anyRequest().authenticated()
                                   )
             .sessionManagement(session -> session
