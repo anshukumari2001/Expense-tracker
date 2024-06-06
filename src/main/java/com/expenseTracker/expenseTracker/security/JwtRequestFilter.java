@@ -16,7 +16,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 public class JwtRequestFilter extends OncePerRequestFilter {
     @Autowired
-    private  JwtTokenUtil jwtTokenUtil;
+    private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
     private CustomeUserDetailService userDetailsService;
@@ -25,8 +25,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         String requestTokenHeader = request.getHeader("Authorization");
-        String jwtToken=null;
-        String username=null;
+        String jwtToken = null;
+        String username = null;
 
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
 
@@ -42,7 +42,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         }
 
-        //Once we get the token, validate the token
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);

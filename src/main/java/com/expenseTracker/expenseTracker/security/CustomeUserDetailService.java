@@ -17,11 +17,9 @@ public class CustomeUserDetailService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    @Override public UserDetails loadUserByUsername(String email){
+    @Override public UserDetails loadUserByUsername(String email) {
         User user = userRepository.findByEmail(email).orElseThrow(
             () -> new UsernameNotFoundException("This user email does not exist : " + email));
-        return new org.springframework.security.core.userdetails.User(user.getEmail(),
-                                                                      user.getPassword(),
-                                                                      new ArrayList<>());
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), new ArrayList<>());
     }
 }

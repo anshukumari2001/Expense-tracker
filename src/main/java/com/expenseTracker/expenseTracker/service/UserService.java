@@ -48,9 +48,7 @@ public class UserService {
         existingUser.setName(userModel.getName()!=null ? userModel.getName() : existingUser.getName());
         existingUser.setAge(userModel.getAge()!=null ? userModel.getAge() : existingUser.getAge());
         existingUser.setEmail(userModel.getEmail()!=null ? userModel.getEmail() : existingUser.getEmail());
-        existingUser.setPassword(userModel.getPassword()!=null ?
-                                 passwordEncoder.encode(userModel.getPassword()) :
-                           existingUser.getPassword());
+        existingUser.setPassword(userModel.getPassword()!=null ? passwordEncoder.encode(userModel.getPassword()) : existingUser.getPassword());
         return userRepository.save(existingUser);
     }
 

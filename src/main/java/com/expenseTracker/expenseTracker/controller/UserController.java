@@ -28,22 +28,22 @@ public class UserController {
     @ResponseStatus(code = HttpStatus.CREATED)
     @PostMapping("/user")
     public ResponseEntity<User> createUser(@Valid @RequestBody UserModel userModel) {
-        return new ResponseEntity<>(userService.createUser(userModel), HttpStatus.CREATED) ;
+        return new ResponseEntity<>(userService.createUser(userModel), HttpStatus.CREATED);
     }
 
     @GetMapping("/user")
     public ResponseEntity<User> readUser() {
-        return new ResponseEntity<>(userService.readUser(), HttpStatus.OK) ;
+        return new ResponseEntity<>(userService.readUser(), HttpStatus.OK);
     }
 
     @DeleteMapping("/user")
     public ResponseEntity<HttpStatus> deleteUser() {
         userService.deleteUser();
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT) ;
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/user")
     public ResponseEntity<User> updateUser(@Valid @RequestBody UserModel userModel) {
-        return new ResponseEntity<>(userService.updateUser(userModel), HttpStatus.OK) ;
+        return new ResponseEntity<>(userService.updateUser(userModel), HttpStatus.OK);
     }
 }

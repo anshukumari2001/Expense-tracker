@@ -73,7 +73,6 @@ public class ExpenseService {
     }
 
     public List<Expense> getExpenseByDateRange(Date startDate, Date endDate, Pageable page) {
-        return expenseRepository.findByUserIdAndDateBetween(userService.getLogdInUser().getId(),
-                                                            startDate, endDate, page).getContent();
+        return expenseRepository.findByUserIdAndDateBetween(userService.getLogdInUser().getId(), startDate, endDate, page).getContent();
     }
 }

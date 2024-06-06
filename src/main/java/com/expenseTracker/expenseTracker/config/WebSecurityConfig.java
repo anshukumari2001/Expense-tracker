@@ -25,8 +25,7 @@ public class WebSecurityConfig {
 
     private final UserRepository userRepository;
 
-    public WebSecurityConfig(
-                             UserRepository userRepository) {
+    public WebSecurityConfig(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -46,20 +45,17 @@ public class WebSecurityConfig {
             .sessionManagement(session -> session
                                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                               )
-            .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(authenticationJwtTokenFilter(),
+                             UsernamePasswordAuthenticationFilter.class)
             .httpBasic(withDefaults());
 
-        // Configure AuthenticationManagerBuilder
-        AuthenticationManagerBuilder auth = http.getSharedObject(AuthenticationManagerBuilder.class);
-        auth.userDetailsService(new CustomeUserDetailService(userRepository)).passwordEncoder(passwordEncoder());
+        AuthenticationManagerBuilder auth = http.getSharedObject(
+            AuthenticationManagerBuilder.class);
+        auth.userDetailsService(new CustomeUserDetailService(userRepository)).passwordEncoder(
+            passwordEncoder());
 
         return http.build();
     }
-
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        return new CustomeUserDetailService(userRepository);
-//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -67,7 +63,8 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(
+        AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 }
